@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/svg+xml" href="assets/images/logo.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet" />
+
+  <title>Konsultasi AI Gizi &amp; Kesehatan — GIZICAM</title>
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <link rel="stylesheet" href="assets/css/dashboard.css" />
+</head>
+<body>
+  <div class="app-layout">
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+    <aside class="sidebar" id="appSidebar"></aside>
+
+    <div class="main-area">
+      <header class="topbar" id="appTopbar"></header>
+
+      <main class="content-container">
+        <div class="chat-shell">
+          <!-- Panel Konteks Biodata & Scan Terakhir -->
+          <aside class="chat-context-panel">
+            <div>
+              <span class="badge badge-emerald" style="margin-bottom:0.45rem;">📋 Konteks Profil Aktif</span>
+              <h2 class="section-card-title" style="font-size:0.98rem;">Biodata Anda</h2>
+              <div id="chatContextBio" style="margin-top:0.55rem;"></div>
+            </div>
+
+            <hr style="border:none; border-top:1px solid var(--slate-200);" />
+
+            <div>
+              <h2 class="section-card-title" style="font-size:0.98rem; margin-bottom:0.45rem;">📸 Scan Makanan Terakhir</h2>
+              <div id="chatContextScan"></div>
+            </div>
+
+            <div class="alert alert-warning" style="font-size:0.76rem; margin-top:auto;">
+              <span>⚕️</span>
+              <div>Konsultasi AI bersifat edukatif &amp; pendampingan gizi umum, bukan pengganti diagnosis dokter.</div>
+            </div>
+          </aside>
+
+          <!-- Jendela Chat Utama -->
+          <section class="chat-main-box">
+            <div class="chat-header-bar">
+              <div style="display:flex; align-items:center; gap:0.65rem;">
+                <div style="width:40px; height:40px; border-radius:50%; background:var(--emerald-600); color:#fff; display:flex; align-items:center; justify-content:center; font-size:1.2rem;">🩺</div>
+                <div>
+                  <div style="font-weight:800; font-size:0.98rem; color:var(--slate-900);">Dr. GiziAI — Konsultan Nutrisi Personal</div>
+                  <div style="font-size:0.76rem; color:var(--emerald-700); font-weight:600;">Terhubung dengan API Key AI &amp; Profil Kesehatan Anda</div>
+                </div>
+              </div>
+              <button type="button" class="btn btn-ghost btn-sm" id="clearChatBtn">🗑️ Reset Chat</button>
+            </div>
+
+            <div class="chat-messages-feed" id="chatMessagesFeed"></div>
+
+            <div class="chat-quick-prompts">
+              <button type="button" class="quick-chip" data-quick-prompt="Buatkan ide menu sarapan, makan siang, dan makan malam sehat untuk hari ini sesuai biodata saya.">🍱 Rencana Menu Hari Ini</button>
+              <button type="button" class="quick-chip" data-quick-prompt="Bagaimana cara memenuhi target protein harian saya dengan makanan lokal yang terjangkau?">🥩 Sumber Protein Lokal</button>
+              <button type="button" class="quick-chip" data-quick-prompt="Camilan sehat apa yang aman dan cocok dengan profil kesehatan serta alergi saya?">🍏 Ide Camilan Sehat</button>
+              <button type="button" class="quick-chip" data-quick-prompt="Berikan tips mengatur porsi karbohidrat dan gula agar energi stabil seharian.">⚖️ Tips Porsi Seimbang</button>
+            </div>
+
+            <form class="chat-input-bar" id="chatForm">
+              <button type="button" class="btn btn-outline btn-sm" id="voiceChatMicBtn" title="Bicara untuk mengetik pertanyaan">🎙️</button>
+              <input
+                type="text"
+                id="chatInput"
+                class="form-control"
+                placeholder="Tulis pertanyaan konsultasi gizi atau kesehatan Anda..."
+                autocomplete="off"
+                required
+              />
+              <button type="submit" class="btn btn-primary" id="sendChatBtn">Kirim ➤</button>
+            </form>
+          </section>
+        </div>
+      </main>
+    </div>
+
+    <nav class="mobile-bottom-nav" id="mobileBottomNav"></nav>
+  </div>
+
+  <script src="assets/js/app.js"></script>
+  <script src="assets/js/chat.js"></script>
+</body>
+</html>

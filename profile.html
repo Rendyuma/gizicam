@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/svg+xml" href="assets/images/logo.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet" />
+
+  <title>Profil &amp; Pengaturan AI — GIZICAM</title>
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <link rel="stylesheet" href="assets/css/auth.css" />
+  <link rel="stylesheet" href="assets/css/dashboard.css" />
+</head>
+<body>
+  <div class="app-layout">
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+    <aside class="sidebar" id="appSidebar"></aside>
+
+    <div class="main-area">
+      <header class="topbar" id="appTopbar"></header>
+
+      <main class="content-container">
+        <div class="dashboard-2col">
+          <!-- KOLOM KIRI: EDIT BIODATA KESEHATAN -->
+          <section class="card">
+            <div class="section-card-header">
+              <div>
+                <h1 class="section-card-title" style="font-size:1.15rem;">👤 Biodata &amp; Tujuan Kesehatan</h1>
+                <div id="accountDemoInfo" style="margin-top:0.25rem;"></div>
+              </div>
+            </div>
+
+            <form id="profileBioForm">
+              <div class="form-group">
+                <label class="form-label" for="profNama">Nama Lengkap</label>
+                <input type="text" id="profNama" class="form-control" required />
+              </div>
+
+              <div class="form-row-2">
+                <div class="form-group">
+                  <label class="form-label" for="profUmur">Umur (tahun)</label>
+                  <input type="number" id="profUmur" class="form-control" min="5" max="120" required />
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="profJenisKelamin">Jenis Kelamin</label>
+                  <select id="profJenisKelamin" class="form-control">
+                    <option value="Laki-laki">Laki-laki</option>
+                    <option value="Perempuan">Perempuan</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-row-2">
+                <div class="form-group">
+                  <label class="form-label" for="profTinggi">Tinggi Badan (cm)</label>
+                  <input type="number" id="profTinggi" class="form-control" min="80" max="250" required />
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="profBerat">Berat Badan (kg)</label>
+                  <input type="number" id="profBerat" class="form-control" min="20" max="350" step="0.1" required />
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="profAktivitas">Aktivitas Sehari-hari</label>
+                <select id="profAktivitas" class="form-control">
+                  <option value="Ringan (Banyak duduk / kerja meja)">Ringan (Banyak duduk / kerja meja)</option>
+                  <option value="Sedang (Jalan kaki / olahraga 1-3x seminggu)">Sedang (Jalan kaki / olahraga 1-3x seminggu)</option>
+                  <option value="Aktif (Olahraga rutin 4-5x seminggu)">Aktif (Olahraga rutin 4-5x seminggu)</option>
+                  <option value="Sangat Aktif (Pekerja fisik / latihan intens)">Sangat Aktif (Pekerja fisik / latihan intens)</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="profTujuan">Tujuan Kesehatan</label>
+                <select id="profTujuan" class="form-control">
+                  <option value="Menjaga pola makan sehat">Menjaga pola makan sehat</option>
+                  <option value="Meningkatkan protein">Meningkatkan protein</option>
+                  <option value="Menjaga kesehatan secara umum">Menjaga kesehatan secara umum</option>
+                  <option value="Mengelola pola makan sesuai kebutuhan kesehatan">Mengelola pola makan sesuai kebutuhan kesehatan</option>
+                </select>
+              </div>
+
+              <div class="form-row-2">
+                <div class="form-group">
+                  <label class="form-label" for="profPunyaPenyakit">Memiliki Kondisi/Penyakit?</label>
+                  <select id="profPunyaPenyakit" class="form-control">
+                    <option value="tidak">Tidak</option>
+                    <option value="ya">Ya, memiliki</option>
+                  </select>
+                  <div class="conditional-box" id="profBoxPenyakit">
+                    <label class="form-label" for="profNamaPenyakit">Nama Penyakit/Kondisi</label>
+                    <input type="text" id="profNamaPenyakit" class="form-control" />
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="profPunyaAlergi">Memiliki Alergi Makanan?</label>
+                  <select id="profPunyaAlergi" class="form-control">
+                    <option value="tidak">Tidak</option>
+                    <option value="ya">Ya, memiliki</option>
+                  </select>
+                  <div class="conditional-box" id="profBoxAlergi">
+                    <label class="form-label" for="profJenisAlergi">Jenis Alergi Makanan</label>
+                    <input type="text" id="profJenisAlergi" class="form-control" />
+                  </div>
+                </div>
+              </div>
+
+              <button type="submit" class="btn btn-primary btn-block">💾 Simpan Perubahan Profil</button>
+            </form>
+          </section>
+
+          <!-- KOLOM KANAN: PENGATURAN API KEY AI MULTI-PROVIDER & SUARA -->
+          <div style="display:flex; flex-direction:column; gap:1.35rem;">
+            <section class="card" id="ai-config">
+              <div class="section-card-header">
+                <div>
+                  <span class="badge badge-lime">Multi-Provider AI Engine</span>
+                  <h2 class="section-card-title" style="margin-top:0.35rem;">🔌 Pengaturan API Key AI (Bebas Pilih)</h2>
+                </div>
+              </div>
+
+              <div class="alert alert-emerald" style="margin-bottom:1rem; font-size:0.82rem;">
+                <span>💡</span>
+                <div>
+                  <strong>Tidak harus Gemini!</strong> GIZICAM mendukung API Key dari <strong>OpenRouter (Gratis tanpa kartu kredit)</strong>, <strong>Groq Cloud</strong>, <strong>Mistral AI</strong>, <strong>OpenAI</strong>, atau <strong>Together AI</strong>. Jika admin sudah mengatur <code>AI_API_KEY</code> di Netlify Environment Variables, Anda bisa langsung menggunakannya tanpa mengisi kolom di bawah.
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="aiProviderSelect">Penyedia AI (Provider)</label>
+                <select id="aiProviderSelect" class="form-control">
+                  <option value="auto">Deteksi Otomatis dari API Key (Auto)</option>
+                  <option value="openrouter">OpenRouter (Gratis — openrouter/free)</option>
+                  <option value="groq">Groq Cloud (Super Cepat — Qwen3.8 Vision)</option>
+                  <option value="mistral">Mistral AI (Pixtral Vision &amp; Mistral Small)</option>
+                  <option value="openai">OpenAI (GPT-4o-mini)</option>
+                  <option value="together">Together AI (Llama Vision)</option>
+                  <option value="custom">Custom OpenAI-Compatible Endpoint</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="aiApiKeyInput">API Key AI Anda (Opsional jika Server Key sudah aktif)</label>
+                <input type="password" id="aiApiKeyInput" class="form-control" placeholder="Tempel API Key (sk-or-..., gsk_..., sk-..., dll)" />
+                <div class="form-hint">Disimpan sementara di <code>sessionStorage</code> tab ini (tidak pernah disimpan ke LocalStorage permanen) dan diteruskan aman via Netlify Function.</div>
+              </div>
+
+              <div class="form-group" id="customBaseUrlGroup" style="display:none;">
+                <label class="form-label" for="aiBaseUrlInput">Custom Chat Completions Base URL</label>
+                <input type="url" id="aiBaseUrlInput" class="form-control" placeholder="https://api.example.com/v1/chat/completions" />
+              </div>
+
+              <div class="form-row-2">
+                <div class="form-group">
+                  <label class="form-label" for="aiVisionModelInput">Model Vision / Kamera (Opsional)</label>
+                  <input type="text" id="aiVisionModelInput" class="form-control" />
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="aiChatModelInput">Model Chat Konsultasi (Opsional)</label>
+                  <input type="text" id="aiChatModelInput" class="form-control" />
+                </div>
+              </div>
+
+              <div style="display:flex; flex-wrap:wrap; gap:0.6rem;">
+                <button type="button" class="btn btn-primary btn-sm" id="saveAiConfigBtn">✅ Aktifkan Key Sesi Ini</button>
+                <button type="button" class="btn btn-outline btn-sm" id="testAiConnectionBtn">🔌 Uji Koneksi AI</button>
+                <button type="button" class="btn btn-ghost btn-sm" id="clearAiConfigBtn">Reset ke Server Key</button>
+              </div>
+
+              <div id="aiTestFeedback"></div>
+            </section>
+
+            <section class="card">
+              <h2 class="section-card-title" style="margin-bottom:0.75rem;">🔊 Pengaturan Suara Asisten Kamera</h2>
+              <div class="form-group">
+                <label class="form-label" for="voiceRateRange">Kecepatan Bicara AI: <strong id="voiceRateLabel">1.02x</strong></label>
+                <input type="range" id="voiceRateRange" min="0.8" max="1.35" step="0.05" value="1.02" style="width:100%; accent-color:var(--emerald-600);" />
+              </div>
+              <button type="button" class="btn btn-outline btn-sm" id="testVoiceBtn">🔊 Tes Suara Asisten GIZICAM</button>
+            </section>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <nav class="mobile-bottom-nav" id="mobileBottomNav"></nav>
+  </div>
+
+  <script src="assets/js/app.js"></script>
+  <script src="assets/js/profile.js"></script>
+</body>
+</html>

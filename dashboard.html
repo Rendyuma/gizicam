@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/svg+xml" href="assets/images/logo.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet" />
+
+  <title>Dashboard — GIZICAM</title>
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <link rel="stylesheet" href="assets/css/dashboard.css" />
+</head>
+<body>
+  <div class="app-layout">
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+    <aside class="sidebar" id="appSidebar"></aside>
+
+    <div class="main-area">
+      <header class="topbar" id="appTopbar"></header>
+
+      <main class="content-container">
+        <section class="welcome-banner">
+          <div>
+            <span class="badge badge-lime" style="margin-bottom:0.55rem;">🌿 Asisten Nutrisi &amp; Kamera Suara AI</span>
+            <h1 id="welcomeUserHeading">Halo, Pengguna! 👋</h1>
+            <p id="welcomeGoalSubtitle">Memuat ringkasan target kesehatan harian Anda...</p>
+          </div>
+          <div class="welcome-actions">
+            <a href="scanner.html" class="btn btn-lime">📸 Buka AI Food Scanner</a>
+            <a href="chat.html" class="btn btn-outline" style="background:rgba(255,255,255,0.12); color:#fff; border-color:rgba(255,255,255,0.3);">💬 Konsultasi AI</a>
+          </div>
+        </section>
+
+        <section class="stats-grid-4">
+          <div class="stat-card">
+            <div>
+              <div class="stat-label">Makanan Dipindai</div>
+              <div class="stat-value" id="statTotalScans">0 Makanan</div>
+              <div class="stat-sub">Tersimpan di riwayat lokal</div>
+            </div>
+            <div class="stat-icon-box">🍽️</div>
+          </div>
+
+          <div class="stat-card">
+            <div>
+              <div class="stat-label">Indeks Massa Tubuh (BMI)</div>
+              <div class="stat-value" id="statBmiValue">-</div>
+              <div class="stat-sub">Berdasarkan TB &amp; BB profil</div>
+            </div>
+            <div class="stat-icon-box">⚖️</div>
+          </div>
+
+          <div class="stat-card">
+            <div>
+              <div class="stat-label">Estimasi Kebutuhan Energi</div>
+              <div class="stat-value" id="statTargetCal">- kkal</div>
+              <div class="stat-sub">Target harian TDEE</div>
+            </div>
+            <div class="stat-icon-box">🔥</div>
+          </div>
+
+          <div class="stat-card">
+            <div style="flex:1;">
+              <div class="stat-label">Hidrasi Hari Ini</div>
+              <div class="stat-value" id="statWaterText">0 / 2000 ml</div>
+              <div class="stat-sub" id="statWaterPct">0% tercapai</div>
+              <div class="macro-track" style="margin-top:0.45rem; height:7px;">
+                <div class="macro-fill fill-protein" id="dashWaterProgress" style="width:0%;"></div>
+              </div>
+              <button type="button" class="btn btn-outline btn-sm" id="dashQuickAddWater" style="margin-top:0.55rem; width:100%;">
+                💧 +250 ml Air
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <section class="dashboard-2col">
+          <div class="card">
+            <div class="section-card-header">
+              <h2 class="section-card-title">📊 Ringkasan Nutrisi Hasil Scan Terakhir</h2>
+              <a href="history.html" style="font-size:0.82rem; color:var(--emerald-600); font-weight:700;">Semua Riwayat →</a>
+            </div>
+            <div id="dashLatestNutrition"></div>
+          </div>
+
+          <div class="card">
+            <div class="section-card-header">
+              <h2 class="section-card-title">👤 Ringkasan Biodata Kesehatan</h2>
+              <a href="profile.html" style="font-size:0.82rem; color:var(--emerald-600); font-weight:700;">Edit Profil →</a>
+            </div>
+            <div id="dashBiodataSummary"></div>
+          </div>
+        </section>
+
+        <section class="dashboard-2col">
+          <div class="card">
+            <div class="section-card-header">
+              <h2 class="section-card-title">🕒 Riwayat Scan Terbaru</h2>
+              <a href="scanner.html" class="btn btn-primary btn-sm">+ Scan Baru</a>
+            </div>
+            <div id="dashRecentScans"></div>
+          </div>
+
+          <div class="card">
+            <div class="section-card-header">
+              <h2 class="section-card-title">🥗 Rekomendasi Menu Untuk Anda</h2>
+              <a href="recommendations.html" style="font-size:0.82rem; color:var(--emerald-600); font-weight:700;">Lihat Lengkap →</a>
+            </div>
+            <div id="dashQuickRecommendations"></div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <nav class="mobile-bottom-nav" id="mobileBottomNav"></nav>
+  </div>
+
+  <script src="assets/js/app.js"></script>
+  <script src="assets/js/dashboard.js"></script>
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/svg+xml" href="assets/images/logo.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet" />
+
+  <title>Login — GIZICAM</title>
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <link rel="stylesheet" href="assets/css/auth.css" />
+</head>
+<body class="auth-page">
+  <header class="auth-topbar">
+    <a href="index.html" class="brand-logo">
+      <img src="assets/images/logo.svg" alt="GIZICAM" />
+      <span>GIZI<em>CAM</em></span>
+    </a>
+    <a href="biodata.html" class="btn btn-ghost btn-sm">Isi Biodata Baru</a>
+  </header>
+
+  <main class="auth-wrapper">
+    <div class="auth-card">
+      <div class="auth-stepper">
+        <div class="auth-step done"><span class="auth-step-dot">✓</span><span>Biodata</span></div>
+        <div class="auth-step done"><span class="auth-step-dot">✓</span><span>Akun</span></div>
+        <div class="auth-step active"><span class="auth-step-dot">3</span><span>Login</span></div>
+      </div>
+
+      <div class="auth-header">
+        <h1>Masuk ke GIZICAM</h1>
+        <p>Gunakan email atau username yang telah Anda daftarkan pada perangkat ini.</p>
+      </div>
+
+      <form id="loginForm" novalidate>
+        <div class="form-group">
+          <label class="form-label" for="loginIdentifier">Email atau Username *</label>
+          <input type="text" id="loginIdentifier" class="form-control" placeholder="Masukkan email atau username" required />
+          <div class="form-error" id="err_loginIdentifier"></div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="loginPassword">Password *</label>
+          <div class="password-input-wrap">
+            <input type="password" id="loginPassword" class="form-control" placeholder="Masukkan password Anda" required />
+            <button type="button" class="password-toggle-btn" data-toggle-password="loginPassword">Tampilkan</button>
+          </div>
+          <div class="form-error" id="err_loginPassword"></div>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-block btn-lg">
+          🚀 Masuk ke Dashboard
+        </button>
+      </form>
+
+      <div class="auth-footer-link">
+        Belum membuat akun? <a href="register.html">Daftar sekarang</a>
+      </div>
+    </div>
+  </main>
+
+  <script src="assets/js/app.js"></script>
+  <script src="assets/js/auth.js"></script>
+</body>
+</html>

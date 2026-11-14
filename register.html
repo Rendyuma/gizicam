@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/svg+xml" href="assets/images/logo.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet" />
+
+  <title>Buat Akun — GIZICAM</title>
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <link rel="stylesheet" href="assets/css/auth.css" />
+</head>
+<body class="auth-page">
+  <header class="auth-topbar">
+    <a href="index.html" class="brand-logo">
+      <img src="assets/images/logo.svg" alt="GIZICAM" />
+      <span>GIZI<em>CAM</em></span>
+    </a>
+    <a href="biodata.html" class="btn btn-ghost btn-sm">← Ubah Biodata</a>
+  </header>
+
+  <main class="auth-wrapper">
+    <div class="auth-card">
+      <div class="auth-stepper">
+        <div class="auth-step done"><span class="auth-step-dot">✓</span><span>Biodata</span></div>
+        <div class="auth-step active"><span class="auth-step-dot">2</span><span>Buat Akun</span></div>
+        <div class="auth-step"><span class="auth-step-dot">3</span><span>Login</span></div>
+      </div>
+
+      <div class="auth-header">
+        <h1>Buat Akun GIZICAM</h1>
+        <p>Halo <strong id="registerBioName">Pengguna</strong>, buat kredensial lokal untuk mengakses dashboard Anda.</p>
+      </div>
+
+      <div class="alert alert-emerald" style="margin-bottom:1.15rem; font-size:0.82rem;">
+        <span>🔒</span>
+        <div>Password Anda di-hash menggunakan SHA-256 sebelum disimpan di LocalStorage browser (mode autentikasi lokal demonstrasi).</div>
+      </div>
+
+      <form id="registerForm" novalidate>
+        <div class="form-group">
+          <label class="form-label" for="regUsername">Nama Pengguna (Username) *</label>
+          <input type="text" id="regUsername" class="form-control" placeholder="contoh: budi_sehat" required />
+          <div class="form-error" id="err_regUsername"></div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="regEmail">Email *</label>
+          <input type="email" id="regEmail" class="form-control" placeholder="nama@email.com" required />
+          <div class="form-error" id="err_regEmail"></div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="regPassword">Password *</label>
+          <div class="password-input-wrap">
+            <input type="password" id="regPassword" class="form-control" placeholder="Minimal 6 karakter" required />
+            <button type="button" class="password-toggle-btn" data-toggle-password="regPassword">Tampilkan</button>
+          </div>
+          <div class="form-error" id="err_regPassword"></div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="regConfirmPassword">Konfirmasi Password *</label>
+          <div class="password-input-wrap">
+            <input type="password" id="regConfirmPassword" class="form-control" placeholder="Ulangi password" required />
+            <button type="button" class="password-toggle-btn" data-toggle-password="regConfirmPassword">Tampilkan</button>
+          </div>
+          <div class="form-error" id="err_regConfirmPassword"></div>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-block btn-lg">
+          Daftar Akun &amp; Lanjut Login →
+        </button>
+      </form>
+
+      <div class="auth-footer-link">
+        Sudah memiliki akun? <a href="login.html">Masuk di sini</a>
+      </div>
+    </div>
+  </main>
+
+  <script src="assets/js/app.js"></script>
+  <script src="assets/js/auth.js"></script>
+</body>
+</html>

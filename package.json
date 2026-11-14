@@ -1,0 +1,19 @@
+{
+  "name": "gizicam-ai-nutrition",
+  "version": "1.0.0",
+  "description": "GIZICAM - AI Food Scanner, Voice Nutrition Assistant & Personal Wellness Platform",
+  "type": "module",
+  "scripts": {
+    "dev": "npx netlify-cli dev",
+    "start": "npx netlify-cli dev"
+  },
+  "keywords": [
+    "ai-food-scanner",
+    "nutrition",
+    "netlify-functions",
+    "openrouter",
+    "groq",
+    "voice-assistant"
+  ],
+  "license": "MIT"
+}

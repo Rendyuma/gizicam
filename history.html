@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/svg+xml" href="assets/images/logo.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet" />
+
+  <title>Riwayat Pemindaian — GIZICAM</title>
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <link rel="stylesheet" href="assets/css/dashboard.css" />
+</head>
+<body>
+  <div class="app-layout">
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+    <aside class="sidebar" id="appSidebar"></aside>
+
+    <div class="main-area">
+      <header class="topbar" id="appTopbar"></header>
+
+      <main class="content-container">
+        <div style="display:flex; flex-wrap:wrap; justify-content:space-between; align-items:center; gap:1rem; margin-bottom:1.25rem;">
+          <div>
+            <h1 style="font-size:1.45rem; font-weight:800; color:var(--slate-900);">🗂️ Riwayat Pemindaian Makanan</h1>
+            <p style="font-size:0.88rem; color:var(--slate-600);">Data tersimpan secara lokal di penyimpanan browser perangkat ini.</p>
+          </div>
+          <div style="display:flex; flex-wrap:wrap; gap:0.65rem; align-items:center;">
+            <input type="search" id="searchHistoryInput" class="form-control" placeholder="Cari nama makanan..." style="width:230px; min-height:40px;" />
+            <button type="button" class="btn btn-danger btn-sm" id="clearAllHistoryBtn">🗑️ Hapus Semua</button>
+          </div>
+        </div>
+
+        <div id="historyListContainer"></div>
+      </main>
+    </div>
+
+    <!-- Modal Detail Riwayat -->
+    <div class="modal-backdrop" id="scanDetailModal">
+      <div class="modal-box">
+        <div id="scanDetailModalBody"></div>
+        <div style="margin-top:1.25rem; text-align:right;">
+          <button type="button" class="btn btn-outline btn-sm" id="closeDetailModalBtn">Tutup</button>
+        </div>
+      </div>
+    </div>
+
+    <nav class="mobile-bottom-nav" id="mobileBottomNav"></nav>
+  </div>
+
+  <script src="assets/js/app.js"></script>
+  <script src="assets/js/history.js"></script>
+</body>
+</html>

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/svg+xml" href="assets/images/logo.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet" />
+
+  <title>Isi Biodata Kesehatan — GIZICAM</title>
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <link rel="stylesheet" href="assets/css/auth.css" />
+</head>
+<body class="auth-page">
+  <header class="auth-topbar">
+    <a href="index.html" class="brand-logo">
+      <img src="assets/images/logo.svg" alt="GIZICAM" />
+      <span>GIZI<em>CAM</em></span>
+    </a>
+    <a href="login.html" class="btn btn-ghost btn-sm">Sudah punya akun? Login</a>
+  </header>
+
+  <main class="auth-wrapper">
+    <div class="auth-card auth-card-wide">
+      <div class="auth-stepper">
+        <div class="auth-step active"><span class="auth-step-dot">1</span><span>Biodata Kesehatan</span></div>
+        <div class="auth-step"><span class="auth-step-dot">2</span><span>Buat Akun</span></div>
+        <div class="auth-step"><span class="auth-step-dot">3</span><span>Login &amp; Dashboard</span></div>
+      </div>
+
+      <div class="auth-header">
+        <h1>Lengkapi Biodata Kesehatan Anda</h1>
+        <p>Data ini disimpan di penyimpanan lokal browser perangkat Anda untuk mempersonalisasi perhitungan kalori, peringatan alergi, dan saran gizi AI.</p>
+      </div>
+
+      <form id="biodataForm" novalidate>
+        <div class="form-group">
+          <label class="form-label" for="nama">Nama Lengkap *</label>
+          <input type="text" id="nama" class="form-control" placeholder="Contoh: Budi Santoso" required />
+          <div class="form-error" id="err_nama"></div>
+        </div>
+
+        <div class="form-row-2">
+          <div class="form-group">
+            <label class="form-label" for="umur">Umur (tahun) *</label>
+            <input type="number" id="umur" class="form-control" min="5" max="120" placeholder="25" required />
+            <div class="form-error" id="err_umur"></div>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="jenisKelamin">Jenis Kelamin *</label>
+            <select id="jenisKelamin" class="form-control" required>
+              <option value="">-- Pilih Jenis Kelamin --</option>
+              <option value="Laki-laki">Laki-laki</option>
+              <option value="Perempuan">Perempuan</option>
+            </select>
+            <div class="form-error" id="err_jenisKelamin"></div>
+          </div>
+        </div>
+
+        <div class="form-row-2">
+          <div class="form-group">
+            <label class="form-label" for="tinggi">Tinggi Badan (cm) *</label>
+            <input type="number" id="tinggi" class="form-control" min="80" max="250" placeholder="170" required />
+            <div class="form-error" id="err_tinggi"></div>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="berat">Berat Badan (kg) *</label>
+            <input type="number" id="berat" class="form-control" min="20" max="350" step="0.1" placeholder="65" required />
+            <div class="form-error" id="err_berat"></div>
+          </div>
+        </div>
+
+        <div class="form-row-2">
+          <div class="form-group">
+            <label class="form-label" for="aktivitas">Aktivitas Sehari-hari *</label>
+            <select id="aktivitas" class="form-control" required>
+              <option value="">-- Pilih Tingkat Aktivitas --</option>
+              <option value="Ringan (Banyak duduk / kerja meja)">Ringan (Banyak duduk / kerja meja)</option>
+              <option value="Sedang (Jalan kaki / olahraga 1-3x seminggu)">Sedang (Jalan kaki / olahraga 1-3x seminggu)</option>
+              <option value="Aktif (Olahraga rutin 4-5x seminggu)">Aktif (Olahraga rutin 4-5x seminggu)</option>
+              <option value="Sangat Aktif (Pekerja fisik / latihan intens)">Sangat Aktif (Pekerja fisik / latihan intens)</option>
+            </select>
+            <div class="form-error" id="err_aktivitas"></div>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="tujuan">Tujuan Kesehatan *</label>
+            <select id="tujuan" class="form-control" required>
+              <option value="">-- Pilih Tujuan Kesehatan --</option>
+              <option value="Menjaga pola makan sehat">Menjaga pola makan sehat</option>
+              <option value="Meningkatkan protein">Meningkatkan protein</option>
+              <option value="Menjaga kesehatan secara umum">Menjaga kesehatan secara umum</option>
+              <option value="Mengelola pola makan sesuai kebutuhan kesehatan">Mengelola pola makan sesuai kebutuhan kesehatan</option>
+            </select>
+            <div class="form-error" id="err_tujuan"></div>
+          </div>
+        </div>
+
+        <div class="form-row-2">
+          <div class="form-group">
+            <label class="form-label" for="punyaPenyakit">Apakah memiliki kondisi/penyakit tertentu?</label>
+            <select id="punyaPenyakit" class="form-control">
+              <option value="tidak">Tidak</option>
+              <option value="ya">Ya, memiliki</option>
+            </select>
+            <div class="conditional-box" id="boxPenyakit">
+              <label class="form-label" for="namaPenyakit">Sebutkan nama kondisi/penyakit *</label>
+              <input type="text" id="namaPenyakit" class="form-control" placeholder="Contoh: Maag / GERD, Hipertensi, Diabetes" />
+              <div class="form-error" id="err_namaPenyakit"></div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="punyaAlergi">Apakah memiliki alergi makanan?</label>
+            <select id="punyaAlergi" class="form-control">
+              <option value="tidak">Tidak</option>
+              <option value="ya">Ya, memiliki alergi</option>
+            </select>
+            <div class="conditional-box" id="boxAlergi">
+              <label class="form-label" for="jenisAlergi">Sebutkan jenis alergi makanan *</label>
+              <input type="text" id="jenisAlergi" class="form-control" placeholder="Contoh: Kacang tanah, Udang/Seafood, Susu sapi, Telur" />
+              <div class="form-error" id="err_jenisAlergi"></div>
+            </div>
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-block btn-lg" style="margin-top:0.5rem;">
+          Simpan Biodata &amp; Lanjut Daftar Akun →
+        </button>
+      </form>
+    </div>
+  </main>
+
+  <script src="assets/js/app.js"></script>
+  <script src="assets/js/auth.js"></script>
+</body>
+</html>

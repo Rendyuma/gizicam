@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/svg+xml" href="assets/images/logo.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet" />
+
+  <title>Rekomendasi Makanan Personal — GIZICAM</title>
+  <link rel="stylesheet" href="assets/css/style.css" />
+  <link rel="stylesheet" href="assets/css/dashboard.css" />
+</head>
+<body>
+  <div class="app-layout">
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+    <aside class="sidebar" id="appSidebar"></aside>
+
+    <div class="main-area">
+      <header class="topbar" id="appTopbar"></header>
+
+      <main class="content-container">
+        <div style="margin-bottom:1.25rem;">
+          <h1 style="font-size:1.45rem; font-weight:800; color:var(--slate-900);">🥗 Rekomendasi Makanan Personal</h1>
+          <p style="font-size:0.9rem; color:var(--slate-600);" id="recSubtitle">Disusun berdasarkan biodata, tujuan kesehatan, alergi, dan riwayat scan Anda.</p>
+        </div>
+
+        <div id="recAllergyBanner" style="margin-bottom:1.25rem;"></div>
+        <div id="recScanInsightBanner" style="margin-bottom:1.25rem;"></div>
+        <div id="recCardsGrid" style="display:grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap:1.1rem;"></div>
+      </main>
+    </div>
+
+    <nav class="mobile-bottom-nav" id="mobileBottomNav"></nav>
+  </div>
+
+  <script src="assets/js/app.js"></script>
+  <script>
+    (function () {
+      "use strict";
+      const auth = window.GiziApp.initAppShell("recommendations", "Rekomendasi Makanan");
+      if (!auth) return;
+
+      const { Storage, calculateHealthMetrics, escapeHtml } = window.GiziApp;
+      const { biodata } = auth;
+      const metrics = calculateHealthMetrics(biodata);
+      const history = Storage.getHistory();
+
+      const recSubtitle = document.getElementById("recSubtitle");
+      if (recSubtitle) {
+        recSubtitle.textContent = `Tujuan: ${biodata.tujuan} • Estimasi target harian: ~${metrics.targetCalories} kkal (Protein ${metrics.targetProteinG}g).`;
+      }
+
+      const allergyBanner = document.getElementById("recAllergyBanner");
+      if (allergyBanner && biodata.punyaAlergi === "ya" && biodata.jenisAlergi) {
+        allergyBanner.innerHTML = `
+          <div class="alert alert-danger">
+            <span>🚨</span>
+            <div>
+              <strong>Filter Alergi Aktif (${escapeHtml(biodata.jenisAlergi)}):</strong>
+              Menu di bawah ini telah ditandai potensi alergennya. Selalu periksa komposisi bumbu dan bahan sebelum mengonsumsi.
+            </div>
+          </div>
+        `;
+      }
+
+      const scanInsightBanner = document.getElementById("recScanInsightBanner");
+      if (scanInsightBanner && history.length > 0) {
+        const last = history[0];
+        const n = last.nutrition || {};
+        let insight = `Berdasarkan scan terakhir Anda (<strong>${escapeHtml(last.food_name)}</strong>, ${n.calories_kcal ?? 0} kkal), `;
+        if ((n.fiber_g ?? 0) < 4) {
+          insight += "asupan serat pada hidangan tersebut tergolong rendah — kami memprioritaskan rekomendasi menu kaya sayuran dan serat untuk makan berikutnya.";
+        } else if ((n.protein_g ?? 0) < 15) {
+          insight += "kandungan proteinnya masih bisa dilengkapi — pertimbangkan menu sumber protein tanpa lemak berikut.";
+        } else {
+          insight += "komposisi makronutrisinya cukup baik — pertahankan keseimbangan dengan pilihan menu berikut.";
+        }
+        scanInsightBanner.innerHTML = `<div class="alert alert-emerald"><span>💡</span><div>${insight}</div></div>`;
+      }
+
+      const catalog = [
+        {
+          title: "Dada Ayam Panggang Rempah + Nasi Merah & Tumis Brokoli",
+          mealTime: "Makan Siang / Malam",
+          kcal: 440, protein: 36, carbs: 45, fat: 11,
+          allergens: ["ayam"],
+          goals: ["Meningkatkan protein", "Menjaga pola makan sehat", "Menjaga kesehatan secara umum"],
+          desc: "Sumber protein lengkap rendah lemak jenuh dipadukan karbohidrat kompleks dan serat tinggi."
+        },
+        {
+          title: "Pepes Tahu Tempe Daun Kemangi + Sayur Bening Bayam",
+          mealTime: "Makan Siang",
+          kcal: 360, protein: 22, carbs: 38, fat: 12,
+          allergens: ["kedelai", "tahu", "tempe"],
+          goals: ["Menjaga pola makan sehat", "Mengelola pola makan sesuai kebutuhan kesehatan", "Meningkatkan protein"],
+          desc: "Dikukus tanpa minyak berlebih, kaya protein nabati, isoflavon, dan zat besi."
+        },
+        {
+          title: "Oatmeal Pisang Kayu Manis & Taburan Biji Chia",
+          mealTime: "Sarapan",
+          kcal: 320, protein: 11, carbs: 52, fat: 7,
+          allergens: ["gandum", "oat"],
+          goals: ["Menjaga pola makan sehat", "Mengelola pola makan sesuai kebutuhan kesehatan", "Menjaga kesehatan secara umum"],
+          desc: "Serat larut beta-glukan membantu kenyang lebih lama dan menjaga kestabilan energi pagi."
+        },
+        {
+          title: "Sup Ikan Kakap Kuah Bening, Wortel & Kentang Rebus",
+          mealTime: "Makan Malam",
+          kcal: 380, protein: 29, carbs: 40, fat: 9,
+          allergens: ["ikan", "seafood"],
+          goals: ["Mengelola pola makan sesuai kebutuhan kesehatan", "Meningkatkan protein", "Menjaga kesehatan secara umum"],
+          desc: "Mudah dicerna, kaya asam lemak omega-3 alami, dan rendah lemak jenuh."
+        },
+        {
+          title: "Telur Orak-Arik Sayur & Roti Gandum Panggang",
+          mealTime: "Sarapan Praktis",
+          kcal: 350, protein: 20, carbs: 34, fat: 14,
+          allergens: ["telur", "gandum"],
+          goals: ["Meningkatkan protein", "Menjaga pola makan sehat", "Menjaga kesehatan secara umum"],
+          desc: "Menu sarapan cepat saji 10 menit dengan profil asam amino esensial lengkap."
+        },
+        {
+          title: "Gado-Gado Sayur Segar & Lontong (Bumbu Kacang Terpisah)",
+          mealTime: "Makan Siang",
+          kcal: 410, protein: 16, carbs: 50, fat: 16,
+          allergens: ["kacang", "telur", "kedelai"],
+          goals: ["Menjaga kesehatan secara umum", "Menjaga pola makan sehat"],
+          desc: "Kaya variasi sayuran segar; atur takaran saus kacang sesuai kebutuhan kalori harian."
+        }
+      ];
+
+      const userAllergyLower = (biodata.jenisAlergi || "").toLowerCase();
+      const sorted = catalog.sort((a, b) => {
+        const aMatch = a.goals.includes(biodata.tujuan) ? 1 : 0;
+        const bMatch = b.goals.includes(biodata.tujuan) ? 1 : 0;
+        return bMatch - aMatch;
+      });
+
+      const grid = document.getElementById("recCardsGrid");
+      if (grid) {
+        grid.innerHTML = sorted.map((item) => {
+          const matchedAllergen = biodata.punyaAlergi === "ya"
+            ? item.allergens.find((al) => userAllergyLower.includes(al))
+            : null;
+
+          return `
+            <div class="card card-hover" style="display:flex; flex-direction:column; justify-content:space-between; gap:0.85rem;">
+              <div>
+                <div style="display:flex; justify-content:space-between; align-items:center; gap:0.5rem; margin-bottom:0.5rem;">
+                  <span class="badge badge-emerald">${escapeHtml(item.mealTime)}</span>
+                  <span class="badge badge-lime">~${item.kcal} kkal</span>
+                </div>
+                <h3 style="font-size:1.05rem; font-weight:800; color:var(--slate-900); margin-bottom:0.35rem;">${escapeHtml(item.title)}</h3>
+                <p style="font-size:0.84rem; color:var(--slate-600);">${escapeHtml(item.desc)}</p>
+              </div>
+
+              <div>
+                ${
+                  matchedAllergen
+                    ? `<div class="alert alert-danger" style="padding:0.6rem 0.75rem; font-size:0.78rem; margin-bottom:0.75rem;">
+                         <span>⚠️</span>
+                         <div><strong>Peringatan Alergi:</strong> Mengandung <strong>${escapeHtml(matchedAllergen)}</strong>. Hindari atau ganti bahan ini.</div>
+                       </div>`
+                    : ""
+                }
+                <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:0.4rem; background:var(--slate-50); padding:0.55rem; border-radius:var(--radius-sm); font-size:0.78rem; text-align:center;">
+                  <div><strong>${item.protein}g</strong><br/><span style="color:var(--slate-500);">Protein</span></div>
+                  <div><strong>${item.carbs}g</strong><br/><span style="color:var(--slate-500);">Karbo</span></div>
+                  <div><strong>${item.fat}g</strong><br/><span style="color:var(--slate-500);">Lemak</span></div>
+                </div>
+              </div>
+            </div>
+          `;
+        }).join("");
+      }
+    })();
+  </script>
+</body>
+</html>
